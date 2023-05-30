@@ -9,7 +9,23 @@ function App() {
   ]);
   const [openForm, setOpenForm] = useState(false);
 
-  const addTodo = () => {};
+  const [newTodo, setNewTodo] = useState("");
+
+  const addTodo = () => {
+    const finalTodo = {
+      id: todoList.length + 1,
+      title: newTodo,
+      completed: false,
+    };
+    const allTodos = [...todoList, finalTodo];
+
+    setTodoList(allTodos);
+    setNewTodo("");
+  };
+
+  const saveNewValue = (content) => {
+    setNewTodo(content);
+  };
 
   return (
     <div className="w-[90%] mx-auto">
@@ -19,6 +35,8 @@ function App() {
             className="input input-bordered input-primary w-full max-w-xs bg-white text-black"
             type="text"
             id="newTodo"
+            onChange={(e) => saveNewValue(e.target.value)}
+            value={newTodo}
           />
           <button
             className="btn btn-success text-white"
